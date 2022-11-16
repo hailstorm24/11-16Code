@@ -49,6 +49,7 @@ void setDriveMotors(){
 
 void yAxis(int units, int voltage){
 int direction = abs(units/units);
+
 resetDriveEncoders();
 while(averageDriveEncoders()<abs(units)){
   driveThing(-direction*voltage ,-direction*voltage , direction*voltage, direction*voltage);
@@ -56,6 +57,7 @@ while(averageDriveEncoders()<abs(units)){
   driveThing(0,0,0,0);
 }
 }
+
 pros::c::imu_gyro_s_t gyro = pros::c::imu_get_gyro_rate(7);
 void xAxis(int units, int voltage){
 int direction = abs(units/units);
