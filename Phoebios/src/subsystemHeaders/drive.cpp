@@ -41,38 +41,59 @@ void setDrive(int leftJoystickY,int leftJoystickX, int rightJoystickX){
 
 
 void setDriveMotors(){
-   int leftJoystickY = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
-   int leftJoystickX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-   int rightJoystickX = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+   int leftJoystickY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+   int leftJoystickX = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+   int rightJoystickX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
    setDrive(-leftJoystickY, -leftJoystickX,-rightJoystickX);
+}
+pros::c::imu_gyro_s_t gyro = pros::c::imu_get_gyro_rate(7);
+
+void yAxisGyro(int left, int right){
+driveLeftFront = left;
+driveLeftBack = left;
+driveRightFront = right;
+driveRightBack = right;
 }
 
 void yAxis(int units, int voltage){
 int direction = abs(units/units);
-
 resetDriveEncoders();
 while(averageDriveEncoders()<abs(units)){
+  if(gyro.x > 2){
+  yAxisGyro(0,2);
+  }
+  if(gyro.x>0){
+  yAxisGyro(2, 0);
+  }
   driveThing(-direction*voltage ,-direction*voltage , direction*voltage, direction*voltage);
   pros::delay(10);
   driveThing(0,0,0,0);
 }
 }
+void xAxisGyro(int left, int right){
+driveLeftFront = left;
+driveLeftBack = left;
+driveRightFront = right;
+driveRightBack = right;
+}
 
-pros::c::imu_gyro_s_t gyro = pros::c::imu_get_gyro_rate(7);
 void xAxis(int units, int voltage){
 int direction = abs(units/units);
 resetDriveEncoders();
 while(averageDriveEncoders()<abs(units)){
- if(abs(gyro.x) > 5){
- gay(gyro.x,500);
- }
- else{
+ if(gyro.x > 2){
+  xAxisGyro(0,2);
+  }
+  if(gyro.x>0){
+  xAxisGyro(2, 0);
+  }
+ 
   driveThing(direction*voltage ,-direction*voltage , direction*voltage, -direction*voltage);
   pros::delay(10);
   driveThing(0,0,0,0);
+
  }
  
-}
 }
 
 void gay(int units, int voltage){

@@ -15,3 +15,5 @@ void gay(int units, int voltage);
 //DRIVER CONTROL FUNCTIONS
 void setDriveMotors();
 void auton();
+void xAxisGyro();
+void yAxisGyro();

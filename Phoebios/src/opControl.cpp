@@ -24,6 +24,5 @@ void opcontrol() {
   setRollerMotors();
 	expansionOn();
   pros::delay(20);
-
  }
 }

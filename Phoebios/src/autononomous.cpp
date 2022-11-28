@@ -102,6 +102,15 @@ void autonomous(){
     pros::delay(500);
     setRoller(0);
     */
+        // strafe towards roller (right)
+        // spin roller
+        // strafe away from roller (left)
+        // turn 90 degrees clockwise
+        // strafe towards roller (right)
+        // spin roller
+        // strafe away from roller (left)
+        // spin to align with other side
+
         yAxis(-driveForwardUnit*1.5,200);
         gay(turnUnit, 500);
         xAxis(driveForwardUnit*2, 200);
